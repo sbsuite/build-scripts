@@ -12,6 +12,7 @@
     <tags></tags>
   </metadata>
    <files>
-    <file src="build-scripts\copy-native.ps1" target="tools" />
+    <file src="copy-native.ps1" target="tools" />
+    <file src="ruby-test.rb" target="tools" />
   </files>
 </package>
