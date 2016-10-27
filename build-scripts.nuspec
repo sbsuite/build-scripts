@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>SBSuite.setup-scripts</id>
+    <version>$version$</version>
+    <authors>robertmcintosh, msevestre</authors>
+    <owners>robertmcintosh, msevestre</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Scripts shared among SBSuite setup</description>
+    <releaseNotes>No changes</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags></tags>
+  </metadata>
+   <files>
+    <file src="build-scripts\copy-native.ps1" target="tools" />
+  </files>
+</package>
