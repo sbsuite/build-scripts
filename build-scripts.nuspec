@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>SBSuite.setup-scripts</id>
+    <id>SBSuite.build-scripts</id>
     <version>$version$</version>
     <authors>robertmcintosh, msevestre</authors>
     <owners>robertmcintosh, msevestre</owners>
