@@ -1,1 +1,0 @@
-puts "Hello from ruby script in nuget package"

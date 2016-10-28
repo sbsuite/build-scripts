@@ -13,6 +13,6 @@
   </metadata>
    <files>
     <file src="copy-native.ps1" target="tools" />
-    <file src="ruby-test.rb" target="tools" />
+    <file src="copy-dependencies.rb" target="tools" />
   </files>
 </package>
