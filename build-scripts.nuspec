@@ -12,6 +12,7 @@
     <tags></tags>
   </metadata>
    <files>
+    <file src="colorize.rb" target="tools" />
     <file src="copy-dependencies.rb" target="tools" />
   </files>
 </package>
