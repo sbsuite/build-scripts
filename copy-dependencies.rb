@@ -1,6 +1,12 @@
 require 'FileUtils'
 
 #DSL to allow copying files defined under source_dir into target_dir
+#Example: 
+# => copy_dependencies source_dir, target_dir do
+# =>   copy_file 'native', 'dll'
+# =>   copy_native_dll
+# => end
+
 def copy_depdencies(source_dir, target_dir, &block)
 	dependecyManager = DependencyManager.new(source_dir, target_dir)
 	dependecyManager.instance_eval(&block)
@@ -39,25 +45,53 @@ class DependencyManager
 	#DSL internal method only called at the end of the copy_dependencies process
 	#See http://ruby-doc.org/core-1.9.3/Dir.html#method-c-glob for glob documentation
 	def perform_file_copy
-		dependencies.each do |dep|
-			Dir.glob(dep).each do |f| 
-				puts "Copying #{f} to #{@target_dir}"
-				FileUtils.copy f, @target_dir 
-			end
+		retrieve_target_dir do |target_dir|
+			FileUtils.mkdir_p target_dir
+			copy_depdencies_to target_dir
+		end	
+	end
+
+	#Allow for meta programming and supports method starting with copy and having two sub parameters
+	#Example:
+	# => copy_native_dll
+	# => copy_native_lib
+	def method_missing(method_name, *args)
+		match = method_name.to_s.match(/^copy_(\w+)_(\w+)/)
+		if(match)
+			copy_files match[0], match[1]
+		else
+			super
 		end
 	end
 
 	private 
+
+	def copy_depdencies_to(target_dir)
+		dependencies.each do |dep|
+			Dir.glob(dep).each do |f| 
+				puts "Copying #{f} to #{target_dir}"
+				FileUtils.copy f, target_dir 
+			end
+		end
+	end
 
 	def add_dep(dependencies_to_add)
 		dependencies_to_add.each {|dep| dependencies << dep}
 	end
 
 	def retrieve_file_extensions(file_extensions,&block)
-	  if(file_extensions.respond_to? :each)
-	    file_extensions.each(&block)
-	  else
-	    yield file_extensions
-	  end
+		yield_to_block file_extensions, &block
+	end
+
+	def retrieve_target_dir(&block)
+		yield_to_block @target_dir, &block
+	end
+
+	def yield_to_block(params, &block)
+		if(params.respond_to? :each)
+			params.each(&block)
+		else
+			yield params
+		end
 	end
 end	
