@@ -67,7 +67,10 @@ class DependencyManager
 	private 
 
 	def copy_depdencies_to(target_dir)
+		puts target_dir
+		puts dependencies
 		dependencies.each do |dep|
+			puts dep
 			Dir.glob(dep).each do |f| 
 				puts "Copying #{f} to #{target_dir}"
 				FileUtils.copy f, target_dir 
@@ -76,6 +79,7 @@ class DependencyManager
 	end
 
 	def add_dep(dependencies_to_add)
+		puts dependencies_to_add
 		dependencies_to_add.each {|dep| dependencies << dep}
 	end
 
