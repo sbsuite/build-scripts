@@ -58,7 +58,7 @@ class DependencyManager
 	def method_missing(method_name, *args)
 		match = method_name.to_s.match(/^copy_(\w+)_(\w+)/)
 		if(match)
-			copy_files match[0], match[1]
+			copy_files match[1], match[2]
 		else
 			super
 		end
