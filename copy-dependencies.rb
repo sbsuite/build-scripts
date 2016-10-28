@@ -1,5 +1,4 @@
 require 'FileUtils'
-require_relative 'colorize'
 
 #DSL to allow copying files defined under source_dir into target_dir
 #Example: 
@@ -70,7 +69,7 @@ class DependencyManager
 	def copy_depdencies_to(target_dir)
 		dependencies.each do |dep|
 			Dir.glob(dep).each do |f| 
-				puts "Copying #{f} to #{target_dir}".light_blue
+				puts "Copying #{f} to #{target_dir}"
 				FileUtils.copy f, target_dir 
 			end
 		end
