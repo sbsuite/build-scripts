@@ -35,11 +35,11 @@ class DependencyManager
 	#Example: 
 	# => copy_files 'native', ['dll', 'lib']
 	# This call is equivalent to
-	# => copy_file '**/native/*.dll'
-	# => copy_file '**/native/*.lib'
+	# => copy_file '**/native/**/*.dll'
+	# => copy_file '**/native/**/*.lib'
 	def copy_files(subfolder, file_extensions)
 		retrieve_file_extensions(file_extensions) do |file_extension|
-			copy_file File.join('**', subfolder, "*.#{file_extension}")
+			copy_file File.join('**', subfolder,'**', "*.#{file_extension}")
 		end
 	end
 
